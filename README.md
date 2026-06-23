@@ -69,6 +69,7 @@ cd java-microservice-scaffold && mvn clean test
 
 | 文档 | 说明 |
 |------|------|
+| [docs/PULL-REQUEST-WORKFLOW.md](docs/PULL-REQUEST-WORKFLOW.md) | **Pull Request 工作流（分支、Review、合并）** |
 | [shared/docs/CI-TOOLCHAIN.md](shared/docs/CI-TOOLCHAIN.md) | 工程自动化与 CI 质量门禁 |
 | [shared/docs/SONARQUBE.md](shared/docs/SONARQUBE.md) | SonarLint / SonarQube |
 | [shared/docs/CURSOR-RULES.md](shared/docs/CURSOR-RULES.md) | Cursor 规则（阿里 + 微服务约束） |

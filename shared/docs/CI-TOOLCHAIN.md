@@ -200,6 +200,7 @@ mvn test -Prelease-integration -pl skeleton-service -am
 | [`unit-testing.md`](../../java-microservice-scaffold/docs/unit-testing.md) | 测试分层与 JaCoCo |
 | [`engineering-standards.md`](../../java-microservice-scaffold/docs/engineering-standards.md) | Maven / Profile 细则 |
 | [`Jenkinsfile`](../../Jenkinsfile) | CI 流水线（持续对齐本文门禁） |
+| [`docs/PULL-REQUEST-WORKFLOW.md`](../../docs/PULL-REQUEST-WORKFLOW.md) | Pull Request 分支、Review 与合并规范 |
 | [`docs/DEPLOYMENT.md`](../../docs/DEPLOYMENT.md) | 部署与 Jenkins 配置 |
 
 ---
@@ -208,6 +209,7 @@ mvn test -Prelease-integration -pl skeleton-service -am
 
 - [ ] 提交前本地 `mvn clean test` 通过，JaCoCo 达门槛
 - [ ] IDE 已安装 SonarLint，Connected Mode 绑定团队 SonarQube
+- [ ] 变更通过 Pull Request 合入 `main`，流程见 [`docs/PULL-REQUEST-WORKFLOW.md`](../../docs/PULL-REQUEST-WORKFLOW.md)
 - [ ] PR 必须等 CI 全绿再合并；禁止 `--no-verify` 跳过门禁
 - [ ] AI 批量改码后重点回归：阶段 3 集成测试 + 阶段 4 契约
 - [ ] release 分支合并前确认阶段 5 MySQL 全量测试已通过

@@ -212,6 +212,7 @@ AI 生成代码时的规范约束：
 | 改组织前缀 `com.s3` → `com.tm` | `./shared/scripts/configure-organization.sh --org com.tm` → 见 [PACKAGE-IDENTITY](../shared/docs/PACKAGE-IDENTITY.md) |
 | 从 skeleton 复制出新服务 | `./shared/scripts/rename-skeleton.sh --package com.acme.order --artifact order-service` |
 | 创建新功能规格 | Cursor：`/speckit.specify` 或 `/opsx-propose` |
+| 提交 PR / Code Review | 见 [PULL-REQUEST-WORKFLOW](PULL-REQUEST-WORKFLOW.md) |
 | 本地 Sonar 扫描 | 见 [SONARQUBE](../shared/docs/SONARQUBE.md) |
 | CI 流水线与门禁 | 见 [CI-TOOLCHAIN](../shared/docs/CI-TOOLCHAIN.md)、根目录 `Jenkinsfile` |
 
@@ -233,6 +234,7 @@ AI 生成代码时的规范约束：
 
 | 文档 | 说明 |
 |------|------|
+| [docs/PULL-REQUEST-WORKFLOW.md](PULL-REQUEST-WORKFLOW.md) | **Pull Request 工作流** |
 | [shared/docs/CI-TOOLCHAIN.md](../shared/docs/CI-TOOLCHAIN.md) | Maven、Profile、JaCoCo、CI 门禁 |
 | [shared/docs/SONARQUBE.md](../shared/docs/SONARQUBE.md) | SonarLint / SonarQube |
 | [shared/docs/CURSOR-RULES.md](../shared/docs/CURSOR-RULES.md) | Cursor 规则（阿里 + 微服务架构） |
@@ -263,7 +265,7 @@ AI 生成代码时的规范约束：
 
 | 角色 | 建议阅读顺序 |
 |------|--------------|
-| **后端开发** | 本文 → SKELETON → CI-TOOLCHAIN → CURSOR-IDE-SETUP → 选一个 example 走一遍 Speckit |
+| **后端开发** | 本文 → SKELETON → PULL-REQUEST-WORKFLOW → CI-TOOLCHAIN → CURSOR-IDE-SETUP |
 | **DevOps / 发布** | DEPLOYMENT → CI-TOOLCHAIN → Jenkinsfile |
 | **架构 / TL** | constitution → MICROSERVICES → PACKAGE-IDENTITY |
 | **仅改 common** | common/README → common/docs/DEVELOPMENT.md |

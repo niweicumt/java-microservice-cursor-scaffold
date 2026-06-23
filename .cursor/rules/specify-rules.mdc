@@ -6,6 +6,7 @@ alwaysApply: true
 **Java 微服务 Monorepo**（`java-microservice-common/` + `java-microservice-gateway/` + `java-microservice-scaffold/`；包路径见 `shared/docs/PACKAGE-IDENTITY.md`）。
 
 **新人入门**：[`docs/GETTING-STARTED.md`](docs/GETTING-STARTED.md)（Day 1 路径 + 文档地图）。  
+**Pull Request**：[`docs/PULL-REQUEST-WORKFLOW.md`](docs/PULL-REQUEST-WORKFLOW.md)（分支、Review、合并规范）。  
 从骨架创建新服务：见 **`java-microservice-scaffold/docs/SKELETON.md`**、**`java-microservice-scaffold/docs/microservice-zero-to-one.md`**。  
 包路径配置：**`shared/docs/PACKAGE-IDENTITY.md`**。  
 技术原则：**`java-microservice-scaffold/.specify/memory/constitution.md`**。  
