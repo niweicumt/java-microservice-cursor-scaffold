@@ -1,0 +1,29 @@
+# =============================================================================
+# 本地个人配置模板（提交到 Git）
+# 使用方式：
+#   1. 复制为 application-local.yml（已 .gitignore，不会提交）
+#   2. 按需调整 H2 路径、端口、日志级别等
+#   3. 启动：mvn -pl skeleton-service spring-boot:run -Dspring-boot.run.profiles=dev,local
+#
+# local 覆盖 dev，使用独立 H2 文件库（仅个人调试；MySQL 联调请用 dev Profile，勿配 MySQL 于此文件）。
+# =============================================================================
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/local-db;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8081
+
+logging:
+  level:
+    root: INFO
+    com.s3.skeleton: DEBUG
+  file:
+    path: logs/local

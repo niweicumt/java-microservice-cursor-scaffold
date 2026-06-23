@@ -1,0 +1,38 @@
+# 单元测试 / 集成测试默认配置（H2 内存库，关闭 Nacos / Kafka 自动建 Topic）
+spring:
+  application:
+    name: skeleton-service-test
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+      config:
+        enabled: false
+  config:
+    import: optional:classpath:application.yml
+  datasource:
+    url: jdbc:h2:mem:app_test;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  kafka:
+    listener:
+      auto-startup: false
+    admin:
+      auto-create: false
+
+app:
+  kafka:
+    enabled: false
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+logging:
+  level:
+    root: WARN
+    com.s3.skeleton: INFO

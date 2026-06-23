@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: skeleton-service-api
+          uri: lb://skeleton-service
+          predicates:
+            - Path=/api/v1/**
+
+knife4j:
+  gateway:
+    enabled: true

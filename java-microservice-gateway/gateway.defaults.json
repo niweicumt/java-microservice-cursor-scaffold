@@ -1,0 +1,7 @@
+{
+  "organizationPrefix": "com.s3",
+  "basePackage": "com.s3.gateway",
+  "groupId": "com.s3",
+  "artifactId": "gateway-service",
+  "appName": "gateway-service"
+}

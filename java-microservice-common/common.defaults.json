@@ -1,0 +1,11 @@
+{
+  "organizationPrefix": "com.s3",
+  "basePackage": "com.s3.common",
+  "groupId": "com.s3",
+  "artifactId": "java-microservice-common",
+  "modules": {
+    "core": "common-core",
+    "cloud": "common-cloud-starter",
+    "bom": "common-bom"
+  }
+}

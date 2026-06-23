@@ -1,0 +1,66 @@
+---
+description: 本微服务项目架构、测试、代码生成强制规则
+globs:
+  - "src/**/*.java"
+  - "*.yml"
+  - "pom.xml"
+  - "src/**/*.xml"
+alwaysApply: false
+---
+
+# 项目固定架构与测试规范
+
+> Monorepo 内联副本；独立仓库以本文件为准。  
+> 编码细则见仓库根 `.cursor/rules/alibaba-java-standard.mdc`（若已配置）。  
+> 测试命令：[`docs/unit-testing.md`](../../docs/unit-testing.md)
+
+## 1. 目录强制规范
+
+根包见 `skeleton.defaults.json` / `PACKAGE-IDENTITY.md`。
+
+| 职责 | 规范路径 | Maven 实际包路径 |
+|------|----------|------------------|
+| AI 生成 CRUD | `service/impl/auto` | `{module}.auto.service` + `*AutoServiceImpl` |
+| AI 生成 Mapper | `mapper/auto` | `{module}.auto.repository` |
+| AI 生成 Controller | `controller/auto` | `{module}.auto.controller` |
+| 人工定制业务 | `service/impl/custom` | `{module}.custom.service` |
+| 人工定制单测 | `test/unit/custom` | `src/test/java/.../custom/**/*Test.java` |
+
+**测试目录**（`src/test/java/com/{org}/{module}/`）：
+
+| 目录 | 内容 | 命名 |
+|------|------|------|
+| `test/unit/auto` | AI 同步单元测试 | `*Test` |
+| `test/integration` | Controller 集成测试（H2 + MockMvc） | `*IntegrationTest` |
+| `test/contract` | OpenAPI 契约 | `contract/*Test` |
+
+集成测试继承 `AbstractControllerIntegrationTest`，`.andExpect(openApiContract())`；契约 `src/test/resources/contracts/skeleton-api.openapi.yaml`。
+
+## 2. 数据库测试强制约束
+
+1. 单元/集成测试：**H2 内存库**，`MODE=MySQL`（`src/test/resources/application.yml`）。
+2. Mapper 测试：**增 / 改 / 查 / 删** 全场景。
+3. CI：单元与集成用 H2；**仅 Release** 分支 Testcontainers MySQL（`ReleaseMySqlIT`）。
+
+## 3. AI 代码生成约束
+
+- CRUD 须同步：Service 单测、Controller 单测、Controller 集成测。
+- 单测覆盖：**正常、空参数、无数据、业务异常**。
+- **AssertJ** 断言；Mockito Mock Mapper / Redis / Feign。
+- Service 行覆盖率 **≥ 90%**（JaCoCo）。
+
+## 4. SQL 禁止项
+
+禁存储过程、`DATE_FORMAT`、`IF EXISTS`（DDL）；用标准跨库 SQL；H2 可跑。
+
+## 5. 迭代兼容性
+
+新增 DTO/VO 字段：默认值或非必填；**不修改**原有字段结构/类型/语义。
+
+## 6. 生成后自检
+
+- [ ] auto/custom 边界正确
+- [ ] unit/auto + integration 目录正确
+- [ ] Mapper 五场景 + H2 通过
+- [ ] AssertJ；Service ≥ 90%
+- [ ] SQL 合规；DTO 向后兼容

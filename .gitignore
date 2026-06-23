@@ -1,0 +1,42 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Java
+*.class
+*.jar
+*.war
+*.log
+hs_err_pid*
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local overrides（模板 application-local.yml.example 可提交）
+**/application-local.yml
+*.env
+
+# H2 file database (dev profile)
+**/data/
+*.mv.db
+*.trace.db

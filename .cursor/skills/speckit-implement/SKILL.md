@@ -92,6 +92,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - **IF EXISTS**: Read contracts/ for API specifications and test requirements
    - **IF EXISTS**: Read research.md for technical decisions and constraints
    - **IF EXISTS**: Read .specify/memory/constitution.md for governance constraints
+   - **REQUIRED (Java)**: Read `shared/docs/CURSOR-RULES.md` 与 `.cursor/rules/alibaba-java-standard.mdc`（阿里泰山版 + DTO/Service/Result/H2/auto-custom）；生成后执行规则内自检清单
    - **IF EXISTS**: Read quickstart.md for integration scenarios
 
 4. **Project Setup Verification**:

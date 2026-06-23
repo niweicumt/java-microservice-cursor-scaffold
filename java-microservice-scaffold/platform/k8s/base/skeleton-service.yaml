@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skeleton-service
+  namespace: microservice
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: skeleton-service
+  template:
+    metadata:
+      labels:
+        app: skeleton-service
+    spec:
+      containers:
+        - name: skeleton-service
+          image: your-registry/skeleton-service:1.0.0-SNAPSHOT
+          ports:
+            - containerPort: 8081
+          envFrom:
+            - configMapRef:
+                name: microservice-env
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: microservice-secrets
+                  key: db-password
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8081
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8081
+            initialDelaySeconds: 60
+            periodSeconds: 15
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: skeleton-service
+  namespace: microservice
+spec:
+  selector:
+    app: skeleton-service
+  ports:
+    - port: 8081
+      targetPort: 8081

@@ -1,0 +1,13 @@
+{
+  "sonarlint.rules": {
+    "java:S106": { "level": "on" },
+    "java:S1192": { "level": "on" }
+  },
+  "sonarlint.connectedMode.connections.sonarqube": [
+    {
+      "connectionId": "local-sonarqube",
+      "serverUrl": "http://localhost:9000"
+    }
+  ],
+  "java.configuration.updateBuildConfiguration": "automatic"
+}

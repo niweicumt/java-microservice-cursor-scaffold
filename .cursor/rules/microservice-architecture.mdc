@@ -1,0 +1,84 @@
+---
+description: 本微服务项目架构、测试、代码生成强制规则
+globs:
+  - "**/src/**/*.java"
+  - "**/*.yml"
+  - "**/pom.xml"
+  - "**/src/**/*.xml"
+alwaysApply: false
+---
+
+# 项目固定架构与测试规范
+
+> 人类可读摘要：[`shared/docs/CURSOR-RULES.md`](../../shared/docs/CURSOR-RULES.md)  
+> 编码细则（阿里泰山版）：[`alibaba-java-standard.mdc`](alibaba-java-standard.mdc)  
+> 测试命令与 OpenAPI 契约：[`java-microservice-scaffold/docs/unit-testing.md`](../../java-microservice-scaffold/docs/unit-testing.md)
+
+## 1. 目录强制规范
+
+根包 `com.{org}.{module}`（见 `shared/docs/PACKAGE-IDENTITY.md`）。
+
+| 职责 | 规范路径 | Maven 实际包路径 |
+|------|----------|------------------|
+| AI 生成 CRUD | `service/impl/auto` | `{module}.auto.service` + `*AutoServiceImpl` |
+| AI 生成 Mapper | `mapper/auto` | `{module}.auto.repository`（`*Mapper`） |
+| AI 生成 Controller | `controller/auto` | `{module}.auto.controller` |
+| 人工定制业务 | `service/impl/custom` | `{module}.custom.service` |
+| 人工定制单测 | `test/unit/custom` | `src/test/java/.../custom/**/*Test.java` |
+
+**测试目录**（均在 `src/test/java/com/{org}/{module}/` 下）：
+
+| 目录 | 内容 | 命名 |
+|------|------|------|
+| `test/unit/auto` | AI 同步单元测试，随业务代码刷新 | `*Test`（**非** IntegrationTest） |
+| `test/integration` | Controller 集成测试（H2 + MockMvc） | `*IntegrationTest` |
+| `test/contract` | OpenAPI 契约兼容性 | `contract/*Test` |
+
+- **禁止** 在 `custom` 包生成/覆盖代码；**禁止** 把集成测试放进 `unit/auto`。
+- 集成测试继承 `AbstractControllerIntegrationTest`，响应须 `.andExpect(openApiContract())`；契约文件 `src/test/resources/contracts/*-api.openapi.yaml`。
+
+## 2. 数据库测试强制约束
+
+1. **单元测试 / 集成测试（CI 默认）**：统一 H2 内存库，`jdbc: h2:mem:...;MODE=MySQL;DATABASE_TO_LOWER=TRUE`（见 `src/test/resources/application.yml`）。
+2. **Mapper 测试**：必须覆盖 **新增、更新、按条件查询、按 ID 查询、删除** 全场景；SQL 用 `#{}`，禁 `${}` 拼接。
+3. **CI 分层**：
+   - 单元 + JaCoCo：H2（`-Pci-unit-tests`）
+   - Controller 集成：H2（`-Pci-integration-tests`）
+   - **仅 Release 分支**：Testcontainers 真实 MySQL（`-Prelease-integration`，如 `ReleaseMySqlIT`）
+
+## 3. AI 代码生成约束
+
+生成 CRUD **必须同步输出**配套测试，不得只交业务代码：
+
+| 产出 | 要求 |
+|------|------|
+| Service 单测 | 正常、空参数、无数据、业务异常；Mockito Mock `Mapper` / Redis / Feign |
+| Controller 单测 | MockMvc standalone + Mock Service |
+| Controller 集成测 | `test/integration`，H2 全链路 + OpenAPI 契约校验 |
+| 断言 | **AssertJ**（`assertThat`）；禁 JUnit 4 `Assert.*` |
+| 覆盖率 | Service **行覆盖率 ≥ 90%**（JaCoCo 纳入 `service/**`）；新增功能须带测试 |
+
+违规范例 → 先输出合规代码，并列出违规点。
+
+## 4. SQL 禁止项
+
+Flyway、`mapper/**/*.xml`、Java 内 SQL 均须 **H2（MODE=MySQL）可执行**：
+
+- 禁 MySQL 存储过程 / 触发器
+- 禁 `DATE_FORMAT`、`IF EXISTS`（DDL）等 MySQL 专属语法
+- 禁硬编码 SQL 字符串；复杂查询进 XML
+
+## 5. 迭代兼容性（DTO / VO）
+
+- **新增字段**：必须有默认值或可为 null；**非必填**（不加新的 `@NotNull`/`@NotBlank` 到旧接口必填集）。
+- **禁止**：删除/重命名/改类型已有字段；改 JSON 语义须 bump API `info.version` 并更新 OpenAPI 契约。
+- 分页、枚举、状态码沿用 `Result` + `ResultCode`，禁裸 Map/实体对外返回。
+
+## 6. 生成后自检
+
+- [ ] 业务在 `auto`，定制在 `custom`，未越界覆盖
+- [ ] 单测在 `unit/auto`，集成在 `integration`
+- [ ] Mapper 五场景齐全；H2 可跑 `mvn test`
+- [ ] AssertJ + Mockito；Service 覆盖率目标 ≥ 90%
+- [ ] 无 SQL 禁止项；DTO 向后兼容
+- [ ] 已更新/校验 OpenAPI 契约（若有 API 变更）

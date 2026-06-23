@@ -1,0 +1,8 @@
+server:
+  port: 8081
+
+logging:
+  level:
+    com.s3.skeleton: INFO
+
+# 可在 Nacos 控制台导入：Data ID = skeleton-service.yaml, Group = DEFAULT_GROUP

@@ -1,0 +1,4 @@
+{
+  "organizationPrefix": "com.s3",
+  "description": "团队组织前缀；修改后请执行 shared/scripts/configure-organization.sh"
+}

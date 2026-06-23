@@ -1,0 +1,48 @@
+/**
+ * 独立 Job：仅构建/发布 java-microservice-common 到 Maven 私服
+ *
+ * 适用场景：common 发版频率低于业务服务；业务 Job 从私服拉 common-bom。
+ * Jenkins 凭据：maven-settings（含 server 与 distributionManagement 账号）
+ */
+pipeline {
+    agent any
+
+    parameters {
+        choice(
+            name: 'MAVEN_GOAL',
+            choices: ['deploy', 'install'],
+            description: 'deploy 发布私服；install 仅验证构建'
+        )
+        booleanParam(name: 'SKIP_TESTS', defaultValue: false)
+    }
+
+    environment {
+        JAVA_HOME = "${tool 'JDK17'}"
+        PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
+        MAVEN_LOCAL_REPO = "${env.WORKSPACE}/.m2/repository"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps { checkout scm }
+        }
+        stage('Build Common') {
+            steps {
+                dir('java-microservice-common') {
+                    script {
+                        def goal = params.MAVEN_GOAL
+                        def skip = params.SKIP_TESTS ? '-DskipTests' : ''
+                        withCredentials([file(credentialsId: 'maven-settings', variable: 'MAVEN_SETTINGS_XML')]) {
+                            sh """
+                                mvn clean ${goal} -B \
+                                  -Dmaven.repo.local=${MAVEN_LOCAL_REPO} \
+                                  -s \${MAVEN_SETTINGS_XML} \
+                                  ${skip}
+                            """
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

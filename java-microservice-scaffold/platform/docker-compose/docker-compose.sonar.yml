@@ -1,0 +1,27 @@
+# Local SonarQube server (optional — for Maven sonar:sonar & SonarLint Connected Mode)
+# Usage: docker compose -f platform/docker-compose/docker-compose.sonar.yml up -d
+# UI: http://localhost:9000  default admin / admin (change on first login)
+
+services:
+  sonarqube:
+    image: sonarqube:10.8.1-community
+    container_name: ms-sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
+    volumes:
+      - sonarqube-data:/opt/sonarqube/data
+      - sonarqube-logs:/opt/sonarqube/logs
+      - sonarqube-extensions:/opt/sonarqube/extensions
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/api/system/status"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+
+volumes:
+  sonarqube-data:
+  sonarqube-logs:
+  sonarqube-extensions:

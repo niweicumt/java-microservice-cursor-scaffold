@@ -1,0 +1,125 @@
+---
+description: 阿里Java开发手册泰山版 + 微服务代码生成约束（DTO/Service/Result/H2/auto-custom）
+globs:
+  - "**/src/main/java/**/*.java"
+  - "**/src/test/java/**/*.java"
+  - "**/src/main/resources/**/*.xml"
+  - "**/*.yml"
+alwaysApply: false
+---
+
+# 本项目 AI 代码生成规范（阿里泰山版 + 微服务约束）
+
+> 人类可读摘要：[`shared/docs/CURSOR-RULES.md`](../../shared/docs/CURSOR-RULES.md)  
+> 目录分层 / 测试目录 / CI 分层：[`microservice-architecture.mdc`](microservice-architecture.mdc)
+
+## 一、阿里基础约束
+
+全局 Rules 中阿里编码规范全部生效，不得违反《阿里巴巴 Java 开发手册》（泰山版）强制/推荐规约。
+
+### 1. auto / custom 隔离
+
+| 包 | 职责 | AI 权限 |
+|----|------|---------|
+| `com.{org}.{module}.auto.*` | 基础 CRUD、Mapper、DTO、单表 Service | 可生成 / 可覆盖 |
+| `com.{org}.{module}.custom.*` | 人工业务编排、特殊规则 | **禁止覆盖、删除、移动** |
+
+CRUD 默认落 `auto`；定制逻辑落 `custom`（继承/组合 `auto`）。路径含 `custom` → 仅可读，不得改写。
+
+### 2. 日志（阿里日志规约）
+
+- `org.slf4j.Logger` + `{}` 占位符；禁 `System.out` / 字符串拼接。
+- 手机号、身份证、密码、Token **脱敏**。
+
+### 3. 并发
+
+- 共享变量禁无锁修改；细粒度 `Lock` + `try-finally`。
+- 禁 `synchronized` 锁整个大方法。
+
+### 4. 工具类
+
+- 优先 `java-microservice-common/common-core`；禁业务模块重复造轮子。
+
+---
+
+## 二、微服务代码生成约束（原 java-codegen-constraints）
+
+### 1. DTO 与校验
+
+- 入参 DTO：`jakarta.validation`（`@NotBlank` `@NotNull` `@Min` `@Max` `@Size`）。
+- Controller：`@Valid` / `@Validated`；分页 `page≥1`，`size` 1～100。
+
+### 2. Service 分层
+
+- **基础 CRUD**（单表读写）与 **业务组合**（跨表/发消息）分离；Controller 不做编排。
+- 找不到资源 → `BusinessException(ResultCode.NOT_FOUND, …)`。
+
+### 3. 异常
+
+- 仅 `BusinessException` + `ResultCode`；禁裸抛 `Exception`/`RuntimeException` 表业务错误；禁空 catch。
+
+### 4. 数据库 / Mapper
+
+- 单表/简单联表：MyBatis-Plus `BaseMapper` + `LambdaQueryWrapper`。
+- 复杂 SQL：`mapper/**/*.xml`；禁 Java 硬编码 SQL。
+- 禁存储过程、MySQL 专属函数；Flyway/XML 须 **H2**（`MODE=MySQL`）可跑单测。
+
+### 5. 分页与 API 返回
+
+- 分页：MP `Page`/`IPage` → `PageVO`(records/total/page/size) → `Result<PageVO<T>>`。
+- 对外接口统一 `Result<T>`（code/msg/data）；禁裸返回实体/Map。
+
+### 6. Service 注释（测例友好）
+
+每个 public 业务方法 Javadoc：`@param`、 `@throws BusinessException`、主要分支说明。
+
+### 7. 边界
+
+判空、空集合、循环上限、除数/数量为 0、负数、超大 pageSize 与批量条数（如 ≤500）必须校验或 `@Min`/`@Max`。
+
+---
+
+## 三、测试（阿里单测 + 项目分层）
+
+- 后缀 `*Test` / `*IntegrationTest`；**JUnit 5 + Mockito**。
+- 覆盖：**正常、空值、边界、异常**。
+- Mapper/集成：**H2**（`src/test/resources/application.yml`）；MyBatis 用 `#{}`，禁 `${}` 拼接；禁 `SELECT *`。
+- 详见 `java-microservice-scaffold/docs/unit-testing.md`。
+
+---
+
+## 四、AI 输出要求
+
+1. 生成前校验是否违反上文；**冲突取更严格**。
+2. 有违规 → **先给合规代码** + 标注违规点列表。
+3. **同步生成**配套 `*Test`。
+4. 完成后对照下方自检清单。
+
+### 反例
+
+```java
+// ❌ 无 @Valid；❌ 裸返回
+public User create(User req) { ... }
+// ❌ 硬编码 SQL / RuntimeException 表业务错误
+```
+
+### 正例
+
+```java
+@PostMapping
+public Result<Long> create(@Valid @RequestBody UserCreateRequest req) {
+    return Result.success(userService.create(req));
+}
+```
+
+## 五、生成后自检
+
+- [ ] 未改动 `custom` 包
+- [ ] DTO 校验 + `Result` + `BusinessException`
+- [ ] 无硬编码 SQL；H2 可测
+- [ ] 日志 SLF4J + `{}`，敏感信息脱敏
+- [ ] Service Javadoc 完整
+- [ ] 边界/null/空集合已覆盖
+- [ ] 已附 `*Test`（正常/空/边界/异常）
+- [ ] 无 `System.out`；无吞异常；SQL 使用 `#{}` 绑定（Sonar 强制规则，见 `shared/docs/CI-TOOLCHAIN.md`）
+- [ ] 提交前 `mvn test` 通过；PR 须等 CI 门禁全绿

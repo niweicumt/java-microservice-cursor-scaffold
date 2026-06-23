@@ -1,0 +1,15 @@
+{
+  "organizationPrefix": "com.s3",
+  "basePackage": "com.s3.skeleton",
+  "groupId": "com.s3",
+  "artifactId": "java-microservice-scaffold",
+  "appName": "skeleton-service",
+  "moduleName": "skeleton",
+  "databases": {
+    "dev": "cursor-demo",
+    "test": "app_test",
+    "uat": "app_uat",
+    "pre": "app_pre",
+    "prod": "app_prod"
+  }
+}
