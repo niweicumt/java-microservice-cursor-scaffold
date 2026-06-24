@@ -1,11 +1,14 @@
 # Pull Request 工作流说明
 
+> **摘要已合并** → **[TEAM-PLAYBOOK.md §4](TEAM-PLAYBOOK.md#4-pre-pr-checklist)**（Pre-PR Checklist）· **[QUALITY-GATES.md](QUALITY-GATES.md)**（CI 门禁）  
+> 下文为 **完整细则**，供 Code Review 与流程争议时查阅。
+
 本文档说明本 Monorepo 的 **分支策略、PR 创建、Code Review 与合并规范**。  
 所有向 `main` 合入的变更须通过 Pull Request，**禁止**直接 push 到 `main`。
 
 > **仓库地址**：https://github.com/niweicumt/java-microservice-cursor-scaffold  
-> **CI 门禁详情**：[`shared/docs/CI-TOOLCHAIN.md`](../shared/docs/CI-TOOLCHAIN.md)  
-> **新人环境搭建**：[`docs/GETTING-STARTED.md`](GETTING-STARTED.md)
+> **CI 门禁详情**：[`docs/QUALITY-GATES.md`](QUALITY-GATES.md)  
+> **新人环境搭建**：[`docs/GETTING-STARTED.md`](GETTING-STARTED.md) · **AI 工程化**：[AI-NATIVE-ENGINEERING.md](AI-NATIVE-ENGINEERING.md)
 
 ---
 
@@ -173,7 +176,7 @@ EOF
 
 ### 3.5 Code Review 与 CI
 
-PR 创建后自动触发 CI（对齐 [`CI-TOOLCHAIN.md`](../shared/docs/CI-TOOLCHAIN.md) §5）：
+PR 创建后自动触发 CI（对齐 [`QUALITY-GATES.md`](QUALITY-GATES.md) §6）：
 
 | 阶段 | 内容 | 失败后果 |
 |------|------|----------|
@@ -312,7 +315,7 @@ Review 时可按此清单检查：
 
 ### Q：CI 红了但我本地能通过？
 
-1. 确认本地命令与 CI 一致（见 [`CI-TOOLCHAIN.md`](../shared/docs/CI-TOOLCHAIN.md) §5.4）
+1. 确认本地命令与 CI 一致（见 [`QUALITY-GATES.md`](QUALITY-GATES.md) §7）
 2. 检查是否改了 common 但未 `mvn install`
 3. 查看 Jenkins / GitHub Checks 日志中的具体失败阶段
 
@@ -352,10 +355,12 @@ Review 时可按此清单检查：
 
 | 文档 | 说明 |
 |------|------|
+| [docs/TEAM-PLAYBOOK.md](TEAM-PLAYBOOK.md) | 日常手册与 Pre-PR Checklist |
+| [docs/QUALITY-GATES.md](QUALITY-GATES.md) | CI / 覆盖率门禁 |
 | [docs/GETTING-STARTED.md](GETTING-STARTED.md) | 新人入门 |
-| [shared/docs/CI-TOOLCHAIN.md](../shared/docs/CI-TOOLCHAIN.md) | CI 门禁阶段与本地模拟 |
-| [shared/docs/SONARQUBE.md](../shared/docs/SONARQUBE.md) | 代码质量扫描 |
-| [shared/docs/CURSOR-RULES.md](../shared/docs/CURSOR-RULES.md) | AI 代码规范 |
+| [docs/PROJECT-OVERVIEW.md](PROJECT-OVERVIEW.md) | 文档地图 |
+| [docs/QUALITY-GATES.md](QUALITY-GATES.md) | CI 门禁阶段与本地模拟 |
+| [QUALITY-GATES.md](QUALITY-GATES.md) §5 | SonarLint / SonarQube 扫描 |
 | [java-microservice-scaffold/docs/SKELETON.md](../java-microservice-scaffold/docs/SKELETON.md) | 分层与包结构 |
 | [docs/DEPLOYMENT.md](DEPLOYMENT.md) | 合并后部署与 Jenkins |
 | [Jenkinsfile](../Jenkinsfile) | CI 流水线定义 |

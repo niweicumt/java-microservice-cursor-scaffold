@@ -2,7 +2,7 @@
 
 微服务 **业务脚手架工程**：业务服务模板、Compose/K8s 共享基础设施配置。公共组件通过 Maven 依赖 [`java-microservice-common`](../java-microservice-common/)，API 网关见独立工程 [`java-microservice-gateway`](../java-microservice-gateway/)。
 
-> **新同学入门**：[`docs/GETTING-STARTED.md`](../docs/GETTING-STARTED.md)  
+> **新同学入门**：[`../docs/GETTING-STARTED.md`](../docs/GETTING-STARTED.md) · **文档地图**：[`../docs/PROJECT-OVERVIEW.md`](../docs/PROJECT-OVERVIEW.md)  
 > 从零搭建（macOS）：[`docs/microservice-zero-to-one.md`](docs/microservice-zero-to-one.md)  
 > 包路径配置：[`../shared/docs/PACKAGE-IDENTITY.md`](../shared/docs/PACKAGE-IDENTITY.md)
 
@@ -61,13 +61,14 @@ cd ../java-microservice-gateway && mvn spring-boot:run -Dspring-boot.run.profile
 
 ## 文档
 
+完整文档索引见 **[docs/PROJECT-OVERVIEW.md](../docs/PROJECT-OVERVIEW.md)**；日常开发见 **[docs/TEAM-PLAYBOOK.md](../docs/TEAM-PLAYBOOK.md)**。
+
 | 文档 | 说明 |
 |------|------|
-| [docs/DEPLOYMENT.md](../../docs/DEPLOYMENT.md) | **网关与业务微服务部署** |
+| [docs/SKELETON.md](docs/SKELETON.md) | 分层、创建新服务、联调速查 |
 | [docs/microservice-zero-to-one.md](docs/microservice-zero-to-one.md) | macOS 0→1 搭建 |
-| [docs/SKELETON.md](docs/SKELETON.md) | 分层与规范 |
-| [docs/MICROSERVICES.md](docs/MICROSERVICES.md) | 模块速查 |
 | [docs/engineering-standards.md](docs/engineering-standards.md) | Maven 细则 |
+| [docs/DEPLOYMENT.md](../docs/DEPLOYMENT.md) | 部署指南 |
 
 ## 技术栈
 

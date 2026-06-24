@@ -84,7 +84,7 @@ CRUD 默认落 `auto`；定制逻辑落 `custom`（继承/组合 `auto`）。路
 - 后缀 `*Test` / `*IntegrationTest`；**JUnit 5 + Mockito**。
 - 覆盖：**正常、空值、边界、异常**。
 - Mapper/集成：**H2**（`src/test/resources/application.yml`）；MyBatis 用 `#{}`，禁 `${}` 拼接；禁 `SELECT *`。
-- 详见 `java-microservice-scaffold/docs/unit-testing.md`。
+- 详见 `docs/QUALITY-GATES.md`。
 
 ---
 
@@ -121,5 +121,5 @@ public Result<Long> create(@Valid @RequestBody UserCreateRequest req) {
 - [ ] Service Javadoc 完整
 - [ ] 边界/null/空集合已覆盖
 - [ ] 已附 `*Test`（正常/空/边界/异常）
-- [ ] 无 `System.out`；无吞异常；SQL 使用 `#{}` 绑定（Sonar 强制规则，见 `shared/docs/CI-TOOLCHAIN.md`）
+- [ ] 无 `System.out`；无吞异常；SQL 使用 `#{}` 绑定（Sonar 强制规则，见 `docs/QUALITY-GATES.md`）
 - [ ] 提交前 `mvn test` 通过；PR 须等 CI 门禁全绿
