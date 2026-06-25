@@ -43,7 +43,6 @@ java-cursor-demo/
 | [TEAM-PLAYBOOK.md](TEAM-PLAYBOOK.md) | 日常闭环 + Pre-PR Checklist |
 | [QUALITY-GATES.md](QUALITY-GATES.md) | CI / 覆盖率 / 单测（合并 CI-TOOLCHAIN + unit-testing） |
 | [PULL-REQUEST-WORKFLOW.md](PULL-REQUEST-WORKFLOW.md) | PR 完整细则 |
-| [AGENTLENS.md](AGENTLENS.md) | AgentLens：AI 代码占比统计（团队统一安装） |
 | [CI-TOOLCHAIN.md](../shared/docs/CI-TOOLCHAIN.md) | → stub，见 QUALITY-GATES |
 | [unit-testing.md](../java-microservice-scaffold/docs/unit-testing.md) | → stub，见 QUALITY-GATES |
 | [SONARQUBE.md](../shared/docs/SONARQUBE.md) | → stub，见 QUALITY-GATES §5 |
