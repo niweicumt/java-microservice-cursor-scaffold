@@ -36,8 +36,10 @@ Day 1：[GETTING-STARTED.md](GETTING-STARTED.md) · 文档地图：[PROJECT-OVER
 | # | 类型 | 名称 | 必装 |
 |---|------|------|:----:|
 | 1 | VS Code 扩展 | **SonarLint** | ✅ |
-| 2 | Cursor 插件 | **Superpowers** | ✅ |
-| 3 | CLI | **OpenSpec** | ✅ |
+| 2 | Cursor 扩展 | **AgentLens** | ✅ |
+| 3 | Cursor 插件 | **Superpowers** | ✅ |
+| 4 | CLI | **OpenSpec** | ✅ |
+| 5 | CLI | **AgentLens CLI**（`@vibe-x/agentlens-cli`） | ✅ |
 
 Speckit（`/speckit.*`）仓库内置。
 
@@ -56,6 +58,10 @@ Speckit（`/speckit.*`）仓库内置。
 ```
 
 详情：[QUALITY-GATES.md §5](QUALITY-GATES.md#5-sonarqube-与-sonarlint)
+
+### AgentLens
+
+统计 Cursor AI 生成代码占比；扩展 + CLI + Hooks 安装与团队导出流程见 **[AGENTLENS.md](AGENTLENS.md)**。
 
 ### Superpowers
 
@@ -118,5 +124,6 @@ openspec --version
 | 文档 | 说明 |
 |------|------|
 | [TEAM-PLAYBOOK.md](TEAM-PLAYBOOK.md) | **日常手册**：Vibe Coding + Pre-PR |
+| [AGENTLENS.md](AGENTLENS.md) | AgentLens：AI 代码占比统计 |
 | [QUALITY-GATES.md](QUALITY-GATES.md) | CI、JaCoCo、单测分层 |
 | [PULL-REQUEST-WORKFLOW.md](PULL-REQUEST-WORKFLOW.md) | PR 完整细则 |

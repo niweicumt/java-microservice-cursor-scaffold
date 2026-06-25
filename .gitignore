@@ -40,3 +40,6 @@ Thumbs.db
 **/data/
 *.mv.db
 *.trace.db
+
+# AgentLens local capture (prompts/sessions; see docs/AGENTLENS.md)
+.agentlens/data/

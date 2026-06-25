@@ -12,7 +12,7 @@
 - [ ] **1.1** 安装 JDK 17、Maven 3.9+、Git、Cursor
 - [ ] **1.2** 克隆仓库并在 `java-microservice-common` 执行 `mvn clean install`
 - [ ] **1.3** 在 gateway / scaffold 执行 `mvn clean test`（H2，无需 Docker）
-- [ ] **1.4** 安装 SonarLint、Superpowers、OpenSpec（见 [AI-NATIVE-ENGINEERING §2](AI-NATIVE-ENGINEERING.md#2-工具链必装)）
+- [ ] **1.4** 安装 SonarLint、AgentLens、Superpowers、OpenSpec（见 [AI-NATIVE-ENGINEERING §2](AI-NATIVE-ENGINEERING.md#2-工具链必装) · [AGENTLENS.md](AGENTLENS.md)）
 - [ ] **1.5** 阅读 [PROJECT-OVERVIEW.md](PROJECT-OVERVIEW.md) 了解文档地图
 - [ ] **1.6**（Week 1 必读）阅读 **[TEAM-PLAYBOOK.md](TEAM-PLAYBOOK.md)** — Vibe Coding 与 Pre-PR Checklist
 - [ ] **1.7**（可选）Docker Compose MySQL 联调（见 [§5.2](#52-路径-b本地全栈联调)）
