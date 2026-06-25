@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "SonarSource.sonarlint-vscode",
-    "vibe-x-ai.agentlens"
+    "SonarSource.sonarlint-vscode"
   ]
 }
