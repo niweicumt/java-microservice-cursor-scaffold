@@ -121,7 +121,7 @@
 
 ---
 
-## 九、测试与覆盖率（见 `docs/unit-testing.md`）
+## 九、测试与覆盖率（见 `docs/QUALITY-GATES.md`）
 
 | # | 检查项 | plan.md 勾选 |
 |---|--------|--------------|
@@ -237,4 +237,4 @@ open target/site/jacoco/index.html
 | [`.specify/templates/plan-template.md`](../.specify/templates/plan-template.md) | Speckit plan 模板 |
 | [`SKELETON.md`](SKELETON.md) | 骨架创建流程 |
 | [`engineering-standards.md`](engineering-standards.md) | Maven、Profile、本地配置 |
-| [`unit-testing.md`](unit-testing.md) | 单测分层与 JaCoCo |
+| [`docs/QUALITY-GATES.md`](../../docs/QUALITY-GATES.md) | 单测分层与 JaCoCo |

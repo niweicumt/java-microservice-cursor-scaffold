@@ -375,10 +375,55 @@ rg "com\.s3" --glob '!target/**' --glob '!examples/**'
 
 ---
 
-## 8. 相关文档
+## 8. 技术栈版本与本地联调速查
+
+（原 [MICROSERVICES.md](MICROSERVICES.md) 独特内容已合并于此。）
+
+### 8.1 锁定版本
+
+| 组件 | 版本 |
+|------|------|
+| JDK | **17** |
+| Spring Boot | **3.3.13** |
+| Spring Cloud | **2023.0.5** |
+| Spring Cloud Alibaba | **2023.0.1.2** |
+| MyBatis Plus | **3.5.9** |
+| Nacos Server | **2.3.2** |
+| MySQL | **8.0.40** |
+| Kafka | **3.8.1** |
+
+### 8.2 本地 0→1 启动
+
+```bash
+cd java-microservice-common && mvn clean install && cd ../java-microservice-scaffold
+./platform/docker-compose/start-local.sh
+
+# 终端 1：业务服务
+mvn -pl skeleton-service spring-boot:run -Dspring-boot.run.profiles=dev
+
+# 终端 2：网关
+cd ../java-microservice-gateway && mvn spring-boot:run -Dspring-boot.run.profiles=dev
+```
+
+| 入口 | URL |
+|------|-----|
+| 网关 API 文档 | http://localhost:8080/doc.html |
+| 业务服务文档 | http://localhost:8081/doc.html |
+| Nacos | http://localhost:8848/nacos |
+
+验证：`curl -s http://localhost:8080/api/v1/health`
+
+### 8.3 common-cloud-starter 能力
+
+引入后自动启用：Nacos 注册与配置、OpenFeign + LoadBalancer、Kafka（可 `app.kafka.enabled=false` 关闭）、Actuator。
+
+---
+
+## 9. 相关文档
 
 - [engineering-standards.md](engineering-standards.md) — Maven、Profile、本地配置  
-- [unit-testing.md](unit-testing.md) — 单测分层与 JaCoCo  
+- [docs/QUALITY-GATES.md](../../docs/QUALITY-GATES.md) — 单测分层与 JaCoCo  
 - [plan-constitution-check-appendix.md](plan-constitution-check-appendix.md) — Speckit `plan.md` 宪法检查附录  
+- [PROJECT-OVERVIEW.md](../../docs/PROJECT-OVERVIEW.md) — 文档地图  
 - [README.md](../README.md) — 快速命令  
 - `.specify/memory/constitution.md` — 团队技术宪法  

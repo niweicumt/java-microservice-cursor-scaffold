@@ -120,7 +120,7 @@ mvn clean test
 open target/site/jacoco/index.html
 ```
 
-单测规范：[`docs/unit-testing.md`](../../docs/unit-testing.md)。
+单测规范：[`docs/QUALITY-GATES.md`](../../../docs/QUALITY-GATES.md)。
 
 ## 相关文档
 

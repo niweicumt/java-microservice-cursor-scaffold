@@ -12,7 +12,7 @@ alwaysApply: false
 
 > 人类可读摘要：[`shared/docs/CURSOR-RULES.md`](../../shared/docs/CURSOR-RULES.md)  
 > 编码细则（阿里泰山版）：[`alibaba-java-standard.mdc`](alibaba-java-standard.mdc)  
-> 测试命令与 OpenAPI 契约：[`java-microservice-scaffold/docs/unit-testing.md`](../../java-microservice-scaffold/docs/unit-testing.md)
+> 测试命令与 OpenAPI 契约：[`docs/QUALITY-GATES.md`](../../docs/QUALITY-GATES.md)
 
 ## 1. 目录强制规范
 

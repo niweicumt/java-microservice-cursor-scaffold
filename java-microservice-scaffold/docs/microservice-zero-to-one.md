@@ -2,7 +2,7 @@
 
 本文档面向 **macOS 本地开发**，说明如何基于 **`java-microservice-scaffold/`** 工程，从 0 到 1 搭建、理解并运行微服务。
 
-> **新同学请先读**：[`docs/GETTING-STARTED.md`](../../docs/GETTING-STARTED.md)（Day 1 路径与文档地图）  
+> **新同学请先读**：[`docs/GETTING-STARTED.md`](../../docs/GETTING-STARTED.md) · [`docs/PROJECT-OVERVIEW.md`](../../docs/PROJECT-OVERVIEW.md)  
 > 仓库结构：根目录 [`README.md`](../../README.md)  
 > 包路径配置：[`shared/docs/PACKAGE-IDENTITY.md`](../../shared/docs/PACKAGE-IDENTITY.md)（公共）  
 > **部署指南**：[`docs/DEPLOYMENT.md`](../../docs/DEPLOYMENT.md)  
@@ -591,7 +591,7 @@ mvn -pl skeleton-service spring-boot:run -Dspring-boot.run.profiles=dev \
 3. 通过 K8s ConfigMap / Nacos 注入 `NACOS_ADDR`、`KAFKA_BOOTSTRAP` 等
 4. 仅 `gateway-service` 对外暴露 LoadBalancer/Ingress
 
-详见 `platform/k8s/base/` 与 [MICROSERVICES.md](MICROSERVICES.md) 第 5 节。
+详见 `platform/k8s/base/` 与 [SKELETON.md](SKELETON.md) §8。
 
 ---
 

@@ -4,7 +4,7 @@
 
 业务微服务通过 **Maven 版本依赖** 引用本工程产物，**禁止** copy 源码。
 
-> 新同学入门：[`../docs/GETTING-STARTED.md`](../docs/GETTING-STARTED.md)  
+> 新同学入门：[`../docs/GETTING-STARTED.md`](../docs/GETTING-STARTED.md) · 文档地图：[`../docs/PROJECT-OVERVIEW.md`](../docs/PROJECT-OVERVIEW.md)  
 > 包路径配置（com.s3 → com.tm）：[`../shared/docs/PACKAGE-IDENTITY.md`](../shared/docs/PACKAGE-IDENTITY.md)
 
 ## 模块

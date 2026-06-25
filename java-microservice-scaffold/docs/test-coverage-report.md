@@ -20,4 +20,4 @@
 ## 报告路径
 
 - HTML：`target/site/jacoco/index.html`
-- 规范：[`unit-testing.md`](unit-testing.md)
+- 规范：[`docs/QUALITY-GATES.md`](../../docs/QUALITY-GATES.md)

@@ -3,7 +3,7 @@
 本文档说明如何部署 **共享基础设施**（Docker Compose）、**API 网关**与 **业务微服务**。  
 **单元测试**使用 **H2 内存库**，无需安装 MySQL（见 [§3.4](#34-单元测试h2-内存库无需-mysql--docker-基础设施)）。
 
-> **新同学请先读**：[GETTING-STARTED.md](GETTING-STARTED.md)（Day 1 路径；本文侧重部署与运维）  
+> **新同学请先读**：[GETTING-STARTED.md](GETTING-STARTED.md)（Day 1 路径）· [PROJECT-OVERVIEW.md](PROJECT-OVERVIEW.md)（文档地图）；本文侧重部署与运维  
 > **本地联调基础设施**（Nacos / MySQL / Kafka / Redis）：见 [第 4 节](#4-本地基础设施安装与部署)（仅 `spring-boot:run` 时需要）
 
 > 本地开发与环境搭建见：[microservice-zero-to-one.md](../java-microservice-scaffold/docs/microservice-zero-to-one.md)  
@@ -140,7 +140,7 @@ cd java-microservice-scaffold && mvn clean test
 cd ../java-microservice-gateway && mvn clean test
 ```
 
-> H2 使用 `MODE=MySQL` 尽量对齐方言；与生产 MySQL 8.0 存在差异时，以 Compose MySQL 联调为准。详见 [`unit-testing.md`](../java-microservice-scaffold/docs/unit-testing.md)。
+> H2 使用 `MODE=MySQL` 尽量对齐方言；与生产 MySQL 8.0 存在差异时，以 Compose MySQL 联调为准。详见 [`docs/QUALITY-GATES.md`](../docs/QUALITY-GATES.md)。
 
 ---
 
@@ -722,7 +722,7 @@ application.yml → application-{profile}.yml → Nacos 远程配置 → 环境�
 
 本仓库使用 **Jenkins Pipeline** 完成构建、测试、镜像推送与 K8s 滚动发布。流水线定义见根目录 [`Jenkinsfile`](../Jenkinsfile)。
 
-**团队标准质量门禁**见 **[`shared/docs/CI-TOOLCHAIN.md`](../shared/docs/CI-TOOLCHAIN.md)**；根目录 [`Jenkinsfile`](../Jenkinsfile) **已实现**阶段 1～5，任意门禁失败阻断镜像推送与合并。
+**团队标准质量门禁**见 **[`docs/QUALITY-GATES.md`](../docs/QUALITY-GATES.md)**；根目录 [`Jenkinsfile`](../Jenkinsfile) **已实现**阶段 1～5，任意门禁失败阻断镜像推送与合并。
 
 ### 13.1 流水线总览
 
@@ -915,9 +915,9 @@ Jenkins 日常滚动升级可并行；**首次**环境建议：
 | 文件 | 说明 |
 |------|------|
 | [skeleton-service/src/test/resources/application.yml](../java-microservice-scaffold/skeleton-service/src/test/resources/application.yml) | **单测 H2 配置（无需 MySQL）** |
-| [unit-testing.md](../java-microservice-scaffold/docs/unit-testing.md) | 单测分层与 JaCoCo 规范 |
-| [CI-TOOLCHAIN.md](../shared/docs/CI-TOOLCHAIN.md) | **工程自动化工具链与 CI 质量门禁** |
-| [SONARQUBE.md](../shared/docs/SONARQUBE.md) | SonarLint / SonarQube 扫描 |
+| [docs/QUALITY-GATES.md](../docs/QUALITY-GATES.md) | **质量门禁与 CI 流水线** |
+| [docs/TEAM-PLAYBOOK.md](../docs/TEAM-PLAYBOOK.md) | 日常 Pre-PR Checklist |
+| [docs/QUALITY-GATES.md](../docs/QUALITY-GATES.md) §5 | SonarLint / SonarQube 扫描 |
 | [docker-compose.local.yml](../java-microservice-scaffold/platform/docker-compose/docker-compose.local.yml) | 本地联调基础设施（含 MySQL；单测不需要） |
 | [start-local.sh](../java-microservice-scaffold/platform/docker-compose/start-local.sh) | **一键启动本地联调基础设施** |
 | [stop-local.sh](../java-microservice-scaffold/platform/docker-compose/stop-local.sh) | 停止 / 清理本地基础设施 |

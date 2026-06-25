@@ -1,7 +1,9 @@
 # 项目工程规范
 
-本文档补充 `.specify/memory/constitution.md`，约定**本地调试**与**单元测试**相关的构建与配置标准。  
-本仓库为 **Java 服务骨架**，使用说明见 [`SKELETON.md`](SKELETON.md)。
+Maven 日常操作与本地调试配置。Profile / CI / 单测 / 覆盖率见 **[docs/QUALITY-GATES.md](../../docs/QUALITY-GATES.md)**；日常开发见 **[docs/TEAM-PLAYBOOK.md](../../docs/TEAM-PLAYBOOK.md)**。
+
+本文档补充 `.specify/memory/constitution.md`，约定**本地调试**相关的构建与配置标准。  
+骨架使用说明见 [`SKELETON.md`](SKELETON.md)。
 
 ## 0. 骨架标识配置
 
@@ -174,87 +176,15 @@ mvn spring-boot:run -Dspring-boot.run.profiles=dev
 - **禁止**在 `application-local.yml` 中提交生产/UAT 真实密码后推送到远程仓库
 - `application-local.yml` 必须保持在 `.gitignore` 中
 
-## 3. 单元测试配置
+## 3. 单元测试与 Profile
 
-完整规范见 **[`docs/unit-testing.md`](unit-testing.md)**（分层、命名、覆盖率、质量门槛）。
+Profile 表、单测分层、JaCoCo 门槛、CI 阶段见 **[docs/QUALITY-GATES.md](../../docs/QUALITY-GATES.md)**。  
+本地 `mvn test` 使用 H2 内存库，**无需** MySQL。
 
-### 3.1 测试资源
-
-| 文件 | 作用 |
-|------|------|
-| `src/test/resources/application.yml` | 测试默认配置：H2 内存库 + Flyway 迁移 |
-| `pom.xml` 中 `h2`（runtime scope） | dev / local Profile 与 `mvn test` 使用 H2 驱动 |
-| `src/test/java/com/s3/user/**` | 单元测试 / 集成测试代码 |
-| JaCoCo（`pom.xml`） | `mvn test` 后生成 `target/site/jacoco/index.html` |
-
-### 3.2 运行测试与覆盖率
-
-```bash
-# 运行全部测试
-mvn clean test
-
-# 浏览器查看覆盖率报告
-open target/site/jacoco/index.html
-```
-
-测试使用 H2 `MODE=MySQL`，执行与主工程相同的 `db/migration` 脚本（注意方言差异时以 MySQL 为准做联调）。
-
-**测试分层（摘要）**：
-
-| 类型 | 示例类 | 说明 |
-|------|--------|------|
-| Service 单元 | `UserServiceImplTest` | Mockito，不启容器 |
-| Controller 单元 | `UserControllerTest` | MockMvc standalone，Mock Service |
-| API 集成 | `UserApiIntegrationTest` | `@SpringBootTest` + H2 + MockMvc |
-
-### 3.3 与 Profile 的分工
-
-| 场景 | Profile / 配置 |
-|------|----------------|
-| 本地开发（默认） | `dev` → H2 文件库 `./data/dev-db` |
-| 个人 H2 调试 | `dev,local` → H2 文件库 `./data/local-db` |
-| 本机 MySQL 全栈联调 | `test` → MySQL（Compose） |
-| CI / 本地快速单测 | `src/test/resources/application.yml` → H2 内存 |
-| 测试环境部署 | `test` → MySQL |
-| 生产 | `prod` → MySQL |
-
-详见 **[`../../shared/docs/CI-TOOLCHAIN.md`](../../shared/docs/CI-TOOLCHAIN.md)** §2。
-
-### 3.4 本地 MySQL 联调验证（可选）
-
-在已启动 Compose MySQL 时：
-
-```bash
-# 1. 单元测试（H2，不依赖 MySQL）
-mvn test
-
-# 2. MySQL 联调启动
-./platform/docker-compose/start-local.sh
-mvn spring-boot:run -Dspring-boot.run.profiles=dev
-curl -s http://localhost:8080/api/v1/health
-```
-
-预期：`/api/v1/health` 返回 `code: 200`，`data.status` 为 `UP`。
-
-## 4. 环境 Profile 一览
-
-| Profile | 数据源 | 配置文件 | 提交 Git | 用途 |
-|---------|--------|----------|----------|------|
-| **dev** | MySQL | application-dev.yml | ✅ | 本地 Compose 联调 |
-| **test** | MySQL | application-test.yml | ✅ | 远端测试环境 |
-| **prod** | MySQL | application-prod.yml | ✅ | 生产 |
-| uat / pre | MySQL | 对应 yml | ✅ | 预发 / UAT（同 prod 模式） |
-| **local** | H2 文件 | application-local.yml | ❌ | 个人 H2 覆盖（dev,local） |
-| （单测） | H2 内存 | src/test/resources/application.yml | ✅ | `mvn test` / CI |
-
-团队强制约束与 CI 门禁：**[`../../shared/docs/CI-TOOLCHAIN.md`](../../shared/docs/CI-TOOLCHAIN.md)**。
-
-## 5. 相关文档
+## 4. 相关文档
 
 - 项目宪法：`.specify/memory/constitution.md`
-- **工程自动化与 CI 门禁**：[`../../shared/docs/CI-TOOLCHAIN.md`](../../shared/docs/CI-TOOLCHAIN.md)
-- **Java / AI 代码规范**：[`../../shared/docs/CURSOR-RULES.md`](../../shared/docs/CURSOR-RULES.md) · [`.cursor/rules/microservice-architecture.mdc`](../../.cursor/rules/microservice-architecture.mdc) · [`.cursor/rules/alibaba-java-standard.mdc`](../../.cursor/rules/alibaba-java-standard.mdc)
-- 单元测试规范：[`docs/unit-testing.md`](unit-testing.md)
+- **质量门禁**：[`docs/QUALITY-GATES.md`](../../docs/QUALITY-GATES.md)
+- **日常手册**：[`docs/TEAM-PLAYBOOK.md`](../../docs/TEAM-PLAYBOOK.md)
+- Java / AI 规范：[`.cursor/rules/alibaba-java-standard.mdc`](../../.cursor/rules/alibaba-java-standard.mdc)
 - 骨架指南：[`SKELETON.md`](SKELETON.md)
-- 示例 quickstart：`examples/001-user-management/quickstart.md`
-- README：根目录 `README.md`

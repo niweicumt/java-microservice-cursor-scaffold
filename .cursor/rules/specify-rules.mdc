@@ -5,25 +5,22 @@ alwaysApply: true
 <!-- SPECKIT START -->
 **Java 微服务 Monorepo**（`java-microservice-common/` + `java-microservice-gateway/` + `java-microservice-scaffold/`；包路径见 `shared/docs/PACKAGE-IDENTITY.md`）。
 
-**新人入门**：[`docs/GETTING-STARTED.md`](docs/GETTING-STARTED.md)（Day 1 路径 + 文档地图）。  
-**Pull Request**：[`docs/PULL-REQUEST-WORKFLOW.md`](docs/PULL-REQUEST-WORKFLOW.md)（分支、Review、合并规范）。  
-从骨架创建新服务：见 **`java-microservice-scaffold/docs/SKELETON.md`**、**`java-microservice-scaffold/docs/microservice-zero-to-one.md`**。  
-包路径配置：**`shared/docs/PACKAGE-IDENTITY.md`**。  
-技术原则：**`java-microservice-scaffold/.specify/memory/constitution.md`**。  
-工程细则：`java-microservice-scaffold/docs/engineering-standards.md`、`java-microservice-scaffold/docs/unit-testing.md`。  
-**工程自动化与 CI 门禁**：[`shared/docs/CI-TOOLCHAIN.md`](shared/docs/CI-TOOLCHAIN.md)（Maven、Profile、JaCoCo、Sonar、标准流水线）。  
-**新人 IDE 必装**：SonarLint + Superpowers + OpenSpec，见 [`shared/docs/CURSOR-IDE-SETUP.md`](shared/docs/CURSOR-IDE-SETUP.md)。  
-**代码质量扫描**：SonarLint + SonarQube，见 [`shared/docs/SONARQUBE.md`](shared/docs/SONARQUBE.md)。
-Speckit 计划宪法检查附录：`java-microservice-scaffold/docs/plan-constitution-check-appendix.md`。
+**文档入口**：
+- 新人 Day 1：[`docs/GETTING-STARTED.md`](docs/GETTING-STARTED.md)
+- **日常手册（Vibe Coding + Pre-PR）**：[`docs/TEAM-PLAYBOOK.md`](docs/TEAM-PLAYBOOK.md)
+- AI 工具链：[`docs/AI-NATIVE-ENGINEERING.md`](docs/AI-NATIVE-ENGINEERING.md)
+- 项目地图：[`docs/PROJECT-OVERVIEW.md`](docs/PROJECT-OVERVIEW.md)
+- **质量门禁（CI / JaCoCo / 单测）**：[`docs/QUALITY-GATES.md`](docs/QUALITY-GATES.md)
 
-**Speckit / AI 工作流（可选）**：在 `java-microservice-scaffold/` 用 `/speckit.*` 生成 `specs/<feature>/`。  
-参考样例（不参与编译）：`java-microservice-scaffold/examples/001-user-management/`。
+从骨架创建新服务：**`java-microservice-scaffold/docs/SKELETON.md`**。  
+包路径：**`shared/docs/PACKAGE-IDENTITY.md`**。  
+技术宪法：**`java-microservice-scaffold/.specify/memory/constitution.md`**。  
+Maven 操作：`java-microservice-scaffold/docs/engineering-standards.md`。  
+Sonar：[`docs/QUALITY-GATES.md`](docs/QUALITY-GATES.md) §5。
 
-**技术摘要**：JDK 17、Spring Boot 3.3.13、Spring Cloud 2023.0.5、Spring Cloud Alibaba 2023.0.1.2、
-Nacos、Gateway、Kafka、Maven、MyBatis Plus、MySQL 8.0、Flyway、
-统一返回 `Result(code, msg, data)`、knife4j + springdoc、多环境 Profile、Logback。
+**Speckit / OpenSpec**：`/opsx-propose` → `/speckit.implement` → Pre-PR 见 TEAM-PLAYBOOK；样例 `java-microservice-scaffold/examples/001-user-management/`。
 
-**本地与测试**：默认 `.mvn/settings.xml`（镜像，本地仓库为 `~/.m2`）；个人仓库路径可复制
-`.mvn/settings.xml.example` → `.mvn/settings.xml`（若团队约定忽略该文件）。  
-本地 MySQL 联调：默认 `dev` Profile（`application-dev.yml`）；个人 H2 用 `dev,local` + `application-local.yml`。`mvn test` 仍为 H2 内存，见 [`shared/docs/CI-TOOLCHAIN.md`](shared/docs/CI-TOOLCHAIN.md) §2。
+**技术摘要**：JDK 17、Spring Boot 3.3.13、Spring Cloud 2023.0.5、Nacos、Gateway、Kafka、MyBatis Plus、MySQL 8.0、Flyway、`Result(code, msg, data)`。
+
+**本地与测试**：`.mvn/settings.xml`；MySQL 联调用 `dev` Profile；`mvn test` 为 H2 内存，见 [`docs/QUALITY-GATES.md`](docs/QUALITY-GATES.md)。变更须带达标单元测试方可合入。
 <!-- SPECKIT END -->

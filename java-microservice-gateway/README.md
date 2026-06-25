@@ -4,7 +4,7 @@
 
 网关是**全局唯一入口**，各业务脚手架（`java-microservice-scaffold`）只需提供业务服务，**不需要**内嵌 gateway 模块。
 
-> 新同学入门：[`../docs/GETTING-STARTED.md`](../docs/GETTING-STARTED.md)  
+> 新同学入门：[`../docs/GETTING-STARTED.md`](../docs/GETTING-STARTED.md) · 文档地图：[`../docs/PROJECT-OVERVIEW.md`](../docs/PROJECT-OVERVIEW.md)  
 > 包路径配置（com.s3 → com.tm）：[`../shared/docs/PACKAGE-IDENTITY.md`](../shared/docs/PACKAGE-IDENTITY.md)
 
 ## 职责
