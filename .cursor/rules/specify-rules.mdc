@@ -2,7 +2,6 @@
 alwaysApply: true
 ---
 
-<!-- SPECKIT START -->
 **Java 微服务 Monorepo**（`java-microservice-common/` + `java-microservice-gateway/` + `java-microservice-scaffold/`；包路径见 `shared/docs/PACKAGE-IDENTITY.md`）。
 
 **文档入口**：
@@ -14,13 +13,12 @@ alwaysApply: true
 
 从骨架创建新服务：**`java-microservice-scaffold/docs/SKELETON.md`**。  
 包路径：**`shared/docs/PACKAGE-IDENTITY.md`**。  
-技术宪法：**`java-microservice-scaffold/.specify/memory/constitution.md`**。  
+技术宪法：**`java-microservice-scaffold/docs/constitution.md`**。  
 Maven 操作：`java-microservice-scaffold/docs/engineering-standards.md`。  
 Sonar：[`docs/QUALITY-GATES.md`](docs/QUALITY-GATES.md) §5。
 
-**Speckit / OpenSpec**：`/opsx-propose` → `/speckit.implement` → Pre-PR 见 TEAM-PLAYBOOK；样例 `java-microservice-scaffold/examples/001-user-management/`。
+**OpenSpec**：`/opsx-propose` → `/opsx-apply` → Pre-PR 见 TEAM-PLAYBOOK；变更目录 `openspec/changes/`。
 
 **技术摘要**：JDK 17、Spring Boot 3.3.13、Spring Cloud 2023.0.5、Nacos、Gateway、Kafka、MyBatis Plus、MySQL 8.0、Flyway、`Result(code, msg, data)`。
 
 **本地与测试**：`.mvn/settings.xml`；MySQL 联调用 `dev` Profile；`mvn test` 为 H2 内存，见 [`docs/QUALITY-GATES.md`](docs/QUALITY-GATES.md)。变更须带达标单元测试方可合入。
-<!-- SPECKIT END -->

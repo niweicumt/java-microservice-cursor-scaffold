@@ -22,7 +22,7 @@ The repository SHALL provide a unified team playbook at `docs/TEAM-PLAYBOOK.md` 
 
 ### Requirement: Architecture constraints human summary
 
-`docs/TEAM-PLAYBOOK.md` SHALL include a concise summary of non-negotiable architecture rules (layering, auto/custom packages, Result pattern, MySQL/Flyway, forbidden SQL patterns) with a link to `java-microservice-scaffold/.specify/memory/constitution.md` for full detail.
+`docs/TEAM-PLAYBOOK.md` SHALL include a concise summary of non-negotiable architecture rules (layering, auto/custom packages, Result pattern, MySQL/Flyway, forbidden SQL patterns) with a link to `java-microservice-scaffold/docs/constitution.md` for full detail.
 
 #### Scenario: AI generates code outside constraints
 
@@ -31,7 +31,7 @@ The repository SHALL provide a unified team playbook at `docs/TEAM-PLAYBOOK.md` 
 
 ### Requirement: Pre-merge quality checklist in playbook
 
-`docs/TEAM-PLAYBOOK.md` SHALL include a mandatory pre-PR checklist: `mvn clean test`, JaCoCo threshold met, SonarLint clean, OpenSpec/Speckit tasks complete, integration/contract tests when API changed.
+`docs/TEAM-PLAYBOOK.md` SHALL include a mandatory pre-PR checklist: `mvn clean test`, JaCoCo threshold met, SonarLint clean, OpenSpec change complete, integration/contract tests when API changed.
 
 #### Scenario: Developer prepares to push
 

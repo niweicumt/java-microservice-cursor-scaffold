@@ -1,4 +1,0 @@
-{
-  "feature_directory": "examples/001-user-management",
-  "note": "Reference example only; new features use specs/<feature>/ via Speckit workflow"
-}

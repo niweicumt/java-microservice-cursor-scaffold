@@ -10,7 +10,7 @@ Monorepo **是什么、模块怎么协作、文档去哪找**。新人 Day 1 后
 |------|:----:|------|
 | **[GETTING-STARTED.md](GETTING-STARTED.md)** | Day 1 | 环境、首次构建、三条路径 |
 | **[TEAM-PLAYBOOK.md](TEAM-PLAYBOOK.md)** | Week 1 | **日常手册**：Vibe Coding、架构十条、Pre-PR |
-| **[AI-NATIVE-ENGINEERING.md](AI-NATIVE-ENGINEERING.md)** | Week 1 | 工具链、OpenSpec/Speckit、Cursor 规则 |
+| **[AI-NATIVE-ENGINEERING.md](AI-NATIVE-ENGINEERING.md)** | Week 1 | 工具链、OpenSpec、Cursor 规则 |
 | **[PROJECT-OVERVIEW.md](PROJECT-OVERVIEW.md)** | 按需 | **本文** — 结构与文档路由 |
 | **[QUALITY-GATES.md](QUALITY-GATES.md)** | 按需 | CI、JaCoCo、单测分层（质量/DevOps 深读） |
 
@@ -48,7 +48,7 @@ java-cursor-demo/
 | [SONARQUBE.md](../shared/docs/SONARQUBE.md) | → stub，见 QUALITY-GATES §5 |
 | [shared/docs/README.md](../shared/docs/README.md) | shared 目录索引 |
 | [engineering-standards.md](../java-microservice-scaffold/docs/engineering-standards.md) | Maven 日常操作 |
-| [constitution.md](../java-microservice-scaffold/.specify/memory/constitution.md) | 技术宪法 |
+| [constitution.md](../java-microservice-scaffold/docs/constitution.md) | 技术宪法 |
 
 ### 开发与部署
 
@@ -84,4 +84,4 @@ CURSOR-IDE-SETUP · CURSOR-RULES · JAVA-CODEGEN · CI-TOOLCHAIN · SONARQUBE ·
 | Vibe Coding → PR | [TEAM-PLAYBOOK](TEAM-PLAYBOOK.md) |
 | 覆盖率 / CI 失败 | [QUALITY-GATES](QUALITY-GATES.md) |
 | 改组织前缀 | [PACKAGE-IDENTITY](../shared/docs/PACKAGE-IDENTITY.md) |
-| OpenSpec / Speckit | [AI-NATIVE-ENGINEERING](AI-NATIVE-ENGINEERING.md) |
+| OpenSpec | [AI-NATIVE-ENGINEERING](AI-NATIVE-ENGINEERING.md) |

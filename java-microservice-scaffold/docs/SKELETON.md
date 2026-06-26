@@ -12,7 +12,6 @@
 | 配置 | `config/` | OpenAPI、MyBatis Plus、MetaObject 填充、PasswordEncoder |
 | 分层占位 | `service/`、`repository/`、`entity/`、`dto/` | `package-info.java` 说明职责 |
 | 数据库 | `db/migration/V1__skeleton_baseline.sql` | 可替换的 Flyway 占位迁移 |
-| 示例文档 | `examples/001-user-management/` | 用户管理 Speckit 样例（**不参与编译**） |
 | 标识配置 | `skeleton.defaults.json` | 根包、groupId、artifact 等**可配置**单一事实来源 |
 
 > 默认根包为 `com.s3.skeleton`，**不必**以 `com.s3` 开头。见 §2。
@@ -209,14 +208,11 @@ curl -s http://localhost:8080/api/v1/health
 
 1. 在 `entity` / `repository` / `service` / `controller` / `dto` 下新增代码  
 2. 在 `db/migration/` 增加 `V2__xxx.sql`（可删除或保留 `V1__skeleton_baseline`）  
-3. （可选）使用 Speckit 在 `specs/<feature>/` 生成规格与任务  
+3. 非 trivial 功能须先走 OpenSpec（`/opsx-propose`），见 [TEAM-PLAYBOOK](../../docs/TEAM-PLAYBOOK.md)
 
-## 5. Speckit / Cursor 工作流（可选）
+## 5. OpenSpec 与 AI 开发
 
-`.specify/`、`.cursor/skills/speckit-*` 为 **AI 辅助研发可选模块**，不影响 `mvn package`。
-
-- 新功能目录：`specs/<编号>-<feature>/`（由 `/speckit.specify` 等命令生成）  
-- 参考样例：`examples/001-user-management/`（原用户管理完整 spec/plan/tasks）  
+新功能开发 **必须** 在 Monorepo 根目录创建 OpenSpec change（`openspec/changes/`），再 `/opsx-apply` 实施。详见 [AI-NATIVE-ENGINEERING](../../docs/AI-NATIVE-ENGINEERING.md)。
 
 ## 6. 目录约定
 
@@ -231,7 +227,6 @@ src/main/java/com/s3/skeleton/
 └── config/         # Spring 配置
 
 skeleton.defaults.json   # 根包 / groupId / artifact 可配置标识
-examples/                # 仅文档与契约样例，不编译
 docs/                    # 工程规范、单测规范、本指南
 scripts/                 # configure-skeleton.sh、rename-skeleton.sh 等
 ```
@@ -313,10 +308,10 @@ mvn spring-boot:run -Dspring-boot.run.profiles=dev
 cat skeleton.defaults.json
 
 # 搜索残留（将 com.s3 换成你的旧 groupId）
-rg "com\.s3" --glob '!target/**' --glob '!examples/**'
+rg "com\.s3" --glob '!target/**'
 ```
 
-手动修正遗漏项后执行 `mvn clean test` 确认。`examples/` 目录为参考样例，脚本**不会**自动替换。
+手动修正遗漏项后执行 `mvn clean test` 确认。
 
 ---
 
@@ -368,10 +363,10 @@ rg "com\.s3" --glob '!target/**' --glob '!examples/**'
 
 骨架锁定 JDK 17、Spring Boot 3.3.13、MyBatis Plus、MySQL 8.0 等。若必须使用其他版本或组件（如 Redis、完整 Spring Security），须：
 
-1. 在 Speckit `plan.md` 的 **「复杂度追踪」** 中记录偏离项与理由
+1. 在 OpenSpec change 的 design 中记录偏离项与理由
 2. 获得评审批准后再实施
 
-详见 [plan-constitution-check-appendix.md](plan-constitution-check-appendix.md) 与 `.specify/memory/constitution.md`。
+详见 [constitution.md](constitution.md)。
 
 ---
 
@@ -423,7 +418,6 @@ cd ../java-microservice-gateway && mvn spring-boot:run -Dspring-boot.run.profile
 
 - [engineering-standards.md](engineering-standards.md) — Maven、Profile、本地配置  
 - [docs/QUALITY-GATES.md](../../docs/QUALITY-GATES.md) — 单测分层与 JaCoCo  
-- [plan-constitution-check-appendix.md](plan-constitution-check-appendix.md) — Speckit `plan.md` 宪法检查附录  
+- [constitution.md](constitution.md) — 团队技术宪法  
 - [PROJECT-OVERVIEW.md](../../docs/PROJECT-OVERVIEW.md) — 文档地图  
 - [README.md](../README.md) — 快速命令  
-- `.specify/memory/constitution.md` — 团队技术宪法  
