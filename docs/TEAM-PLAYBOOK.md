@@ -19,8 +19,8 @@ Day 1 见 [GETTING-STARTED.md](GETTING-STARTED.md)；工具安装见 [AI-NATIVE-
 
 | 业界 AI Native 实践 | 本团队落地 |
 |---------------------|------------|
-| **Spec-driven development** | OpenSpec `/opsx-*` + Speckit `/speckit.*` |
-| **AI guardrails** | `.cursor/rules/*.mdc` + [constitution](../java-microservice-scaffold/.specify/memory/constitution.md) |
+| **Spec-driven development** | OpenSpec `/opsx-*` |
+| **AI guardrails** | `.cursor/rules/*.mdc` + [constitution](../java-microservice-scaffold/docs/constitution.md) |
 | **Shift-left quality** | SonarLint 本地 + `mvn test` + JaCoCo 预 PR |
 | **Trunk-based + PR gates** | `main` 保护 + Jenkins 阶段 1～4 |
 | **Tests as contract for AI** | `auto.*` 代码 + `unit/auto/**/*Test` 同步提交 |
@@ -35,10 +35,10 @@ Day 1 见 [GETTING-STARTED.md](GETTING-STARTED.md)；工具安装见 [AI-NATIVE-
 需求 / intent
     │
     ▼
-/opsx-propose 或 /speckit.specify     ← 写清边界与验收标准
+/opsx-propose                         ← 写清边界与验收标准
     │   （可选 /opsx-explore）
     ▼
-/opsx-apply 或 /speckit.implement     ← 按 tasks 写代码 + 测试
+/opsx-apply                           ← 按 tasks 写代码 + 测试
     │
     ▼
 本地门禁（§4 Checklist）               ← mvn test + jacoco + SonarLint
@@ -52,8 +52,8 @@ git push → Pull Request → CI 1～4 全绿
 
 | 变更类型 | 最低要求 |
 |----------|----------|
-| 业务功能 / Bug | OpenSpec change **或** Speckit `specs/<feature>/` |
-| 纯文档 | `docs/<简述>` 分支 + PR，可跳过 Speckit |
+| 业务功能 / Bug | OpenSpec change（`openspec/changes/`） |
+| 纯文档 | `docs/<简述>` 分支 + PR，可跳过 OpenSpec |
 | 改 common | 先 `mvn install`，再测依赖工程 |
 
 命令与工具细节：[AI-NATIVE-ENGINEERING.md](AI-NATIVE-ENGINEERING.md)  
@@ -63,7 +63,7 @@ PR 完整细则：[PULL-REQUEST-WORKFLOW.md](PULL-REQUEST-WORKFLOW.md)
 
 ## 3. 架构十条（必守）
 
-完整宪法：[constitution.md](../java-microservice-scaffold/.specify/memory/constitution.md)
+完整宪法：[constitution.md](../java-microservice-scaffold/docs/constitution.md)
 
 | # | 约束 | 检查点 |
 |---|------|--------|
@@ -88,7 +88,7 @@ Review AI 大批量改动时，重点看：**集成测试 + OpenAPI 契约 diff 
 
 ### 4.1 规格与代码
 
-- [ ] 非 trivial 变更已有 OpenSpec change 或 Speckit spec
+- [ ] 非 trivial 变更已有 OpenSpec change
 - [ ] AI 业务代码在 `auto.*`；人工扩展在 `custom.*`
 - [ ] 未提交 `application-local.yml`、`.env`、密钥、`target/`
 

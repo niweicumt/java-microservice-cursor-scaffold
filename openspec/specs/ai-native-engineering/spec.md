@@ -8,7 +8,7 @@
 
 ### Requirement: Consolidated AI-native engineering guide
 
-The repository SHALL provide a consolidated AI-native engineering guide at `docs/AI-NATIVE-ENGINEERING.md` covering: required IDE tooling (SonarLint, Superpowers, OpenSpec CLI), OpenSpec and Speckit workflows, Cursor rules overview, Pull Request workflow summary, pre-commit quality gates (tests, SonarLint, coverage), **industry AI Native practice alignment**, and **cross-links to TEAM-PLAYBOOK and QUALITY-GATES** as the operational deep references.
+The repository SHALL provide a consolidated AI-native engineering guide at `docs/AI-NATIVE-ENGINEERING.md` covering: required IDE tooling (SonarLint, Superpowers, OpenSpec CLI), OpenSpec workflows, Cursor rules overview, Pull Request workflow summary, pre-commit quality gates (tests, SonarLint, coverage), **industry AI Native practice alignment**, and **cross-links to TEAM-PLAYBOOK and QUALITY-GATES** as the operational deep references.
 
 #### Scenario: Developer starts AI-assisted feature
 

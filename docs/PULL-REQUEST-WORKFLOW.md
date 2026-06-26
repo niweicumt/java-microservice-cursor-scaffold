@@ -188,7 +188,7 @@ PR 创建后自动触发 CI（对齐 [`QUALITY-GATES.md`](QUALITY-GATES.md) §6�
 
 **Reviewer 职责**：
 
-- 确认设计与 [`constitution.md`](../java-microservice-scaffold/.specify/memory/constitution.md) 一致
+- 确认设计与 [`constitution.md`](../java-microservice-scaffold/docs/constitution.md) 一致
 - 检查分层、异常处理、SQL 方言、DTO 兼容性
 - 对 AI 大批量改动，重点看集成测试与契约 diff
 
@@ -228,7 +228,7 @@ git push origin --delete feature/42-user-login   # 可选：删除远程分支
 <!-- 1～3 条：做了什么、为什么做 -->
 
 ## Related
-<!-- Issue / OpenSpec change / Speckit feature 链接（如有） -->
+<!-- Issue / OpenSpec change 链接（如有） -->
 - Closes #42
 - openspec/changes/add-user-login/
 
@@ -283,11 +283,11 @@ None
 正式功能开发建议 **先规格、后 PR**：
 
 ```text
-/opsx-propose 或 /speckit.specify
+/opsx-propose
     → plan / tasks
-    → /speckit.implement（在功能分支上）
+    → /opsx-apply（在功能分支上）
     → 本地预校验
-    → 创建 PR（描述中链接 openspec/changes/ 或 specs/<feature>/）
+    → 创建 PR（描述中链接 openspec/changes/）
     → Review + CI
     → 合并后 /opsx-archive（OpenSpec 变更）
 ```

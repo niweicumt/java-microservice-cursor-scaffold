@@ -10,7 +10,7 @@
 |------|------|
 | **[docs/GETTING-STARTED.md](docs/GETTING-STARTED.md)** | 新人 Day 1 |
 | **[docs/TEAM-PLAYBOOK.md](docs/TEAM-PLAYBOOK.md)** | **日常手册** — Vibe Coding + Pre-PR |
-| **[docs/AI-NATIVE-ENGINEERING.md](docs/AI-NATIVE-ENGINEERING.md)** | AI 工具链与 OpenSpec/Speckit |
+| **[docs/AI-NATIVE-ENGINEERING.md](docs/AI-NATIVE-ENGINEERING.md)** | AI 工具链与 OpenSpec |
 | **[docs/PROJECT-OVERVIEW.md](docs/PROJECT-OVERVIEW.md)** | 项目综述与文档地图 |
 | **[docs/QUALITY-GATES.md](docs/QUALITY-GATES.md)** | CI / 覆盖率 / 单测门禁 |
 

@@ -2,7 +2,7 @@
 
 Maven 日常操作与本地调试配置。Profile / CI / 单测 / 覆盖率见 **[docs/QUALITY-GATES.md](../../docs/QUALITY-GATES.md)**；日常开发见 **[docs/TEAM-PLAYBOOK.md](../../docs/TEAM-PLAYBOOK.md)**。
 
-本文档补充 `.specify/memory/constitution.md`，约定**本地调试**相关的构建与配置标准。  
+本文档补充 [`constitution.md`](constitution.md)，约定**本地调试**相关的构建与配置标准。  
 骨架使用说明见 [`SKELETON.md`](SKELETON.md)。
 
 ## 0. 骨架标识配置
@@ -183,7 +183,7 @@ Profile 表、单测分层、JaCoCo 门槛、CI 阶段见 **[docs/QUALITY-GATES.
 
 ## 4. 相关文档
 
-- 项目宪法：`.specify/memory/constitution.md`
+- 项目宪法：`docs/constitution.md`
 - **质量门禁**：[`docs/QUALITY-GATES.md`](../../docs/QUALITY-GATES.md)
 - **日常手册**：[`docs/TEAM-PLAYBOOK.md`](../../docs/TEAM-PLAYBOOK.md)
 - Java / AI 规范：[`.cursor/rules/alibaba-java-standard.mdc`](../../.cursor/rules/alibaba-java-standard.mdc)

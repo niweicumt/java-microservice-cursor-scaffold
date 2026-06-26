@@ -1,38 +1,10 @@
-<!--
-同步影响报告
-- 版本变更：1.1.0 → 1.2.0
-- 修改的原则：I. 强制技术栈 — JDK 11 → 17，Spring Boot 2.7.18 → 3.3.13
-- 模板更新：✅ plan/spec/tasks 模板、✅ specify-rules.mdc、✅ README、✅ docs/*
--->
-- 修改的原则：无删除
-- 新增章节：VI. 本地开发与构建规范（Maven 仓库、application-local、单测配置）
-- 新增文件：.mvn/settings.xml、.mvn/maven.config、application-local.yml.example、
-  src/test/resources/application.yml、docs/engineering-standards.md
-- 模板更新：✅ README.md、✅ .cursor/rules/specify-rules.mdc
-- 历史：1.0.0 初始生效 (2026-05-26)
-- 修改的原则：无（自模板占位符首次正式生效）
-- 新增章节：
-  - 核心原则（5 条）：强制技术栈、分层架构、数据库标准、横切基础设施、代码风格与质量
-  - 技术栈要求（明细表）
-  - 开发流程与质量门禁
-  - 治理
-- 移除章节：模板占位原则与通用示例
-- 已更新模板：
-  - ✅ .specify/templates/plan-template.md
-  - ✅ .specify/templates/spec-template.md
-  - ✅ .specify/templates/tasks-template.md
-  - ✅ .cursor/rules/specify-rules.mdc
-- 待更新模板：无
-- 延期 TODO：无
--->
-
 # Java 团队服务骨架 — 项目宪法
 
 ## 核心原则
 
 ### I. 强制技术栈（不可协商）
 
-所有应用代码与构建配置 **必须** 使用下列版本与工具。如需偏离，须在功能计划的「复杂度追踪」表中记录例外说明，并在实施前获得明确批准。
+所有应用代码与构建配置 **必须** 使用下列版本与工具。如需偏离，须在 OpenSpec 变更的 design 或 tasks 中记录例外说明，并在实施前获得明确批准。
 
 - **JDK**：17（Java 17）— Maven 中 `source`/`target`/`release` **必须** 为 17
 - **Spring Boot**：3.3.13 — 父 POM 或 BOM **必须** 锁定此版本
@@ -114,7 +86,7 @@
 - **必须** 通过脚本统一替换组织前缀：
   - 跨 common / gateway / scaffold：`./shared/scripts/configure-organization.sh --org <新前缀>`
   - 仅 scaffold 模块标识：`shared/scripts/configure-skeleton.sh` / `rename-skeleton.sh`
-- 详细说明见 [`shared/docs/PACKAGE-IDENTITY.md`](../../../shared/docs/PACKAGE-IDENTITY.md)
+- 详细说明见 [`shared/docs/PACKAGE-IDENTITY.md`](../../shared/docs/PACKAGE-IDENTITY.md)
 
 **理由**：包路径与 Maven 坐标、Feign 扫描、JaCoCo 路径、文档引用联动；脚本批量替换可保证三工程一致，避免 PR 遗漏与编译/runtime 不一致。
 
@@ -141,24 +113,24 @@
 
 ## 开发流程与质量门禁
 
-1. **规格说明**（`/speckit.specify`）— 需求在可能范围内保持与技术无关；假设 **不得** 与本宪法冲突
-2. **计划**（`/speckit.plan`）— 技术上下文 **必须** 列出本文档中的栈版本；阶段 0 调研前 **必须** 通过宪法检查
-3. **任务**（`/speckit.tasks`）— 阶段 2（基础设施）**必须** 包含统一返回、全局异常、日志、knife4j 等任务（若尚未存在）
-4. **实施**（`/speckit.implement`）— **必须** 使用 `src/main/java` 包结构；测试放在 `src/test/java`
-5. **评审** — PR **必须** 核对：版本锁定、分层边界、横切组件、阿里巴巴手册符合性
+1. **提案**（`/opsx-propose`）— 在 `openspec/changes/` 写清边界与验收标准；假设 **不得** 与本宪法冲突
+2. **设计与任务**（`/opsx-apply` 前）— 技术上下文 **必须** 列出本文档中的栈版本；偏离项须在 design 中记录
+3. **实施**（`/opsx-apply`）— **必须** 使用 `src/main/java` 包结构；测试放在 `src/test/java`
+4. **评审** — PR **必须** 核对：版本锁定、分层边界、横切组件、阿里巴巴手册符合性
+5. **归档**（`/opsx-archive`）— 合入 `main` 后归档 OpenSpec change
 
 ## 治理
 
-本宪法优先于规格、计划、任务及临时实施说明中的冲突内容。若某功能需要技术栈或架构例外，计划 **必须** 在 **复杂度追踪** 中记录并说明理由；**禁止** 静默偏离。
+本宪法优先于 OpenSpec 变更文档及临时实施说明中的冲突内容。若某功能需要技术栈或架构例外，OpenSpec design **必须** 记录并说明理由；**禁止** 静默偏离。
 
 **修订程序**：
 
-1. 通过 `/speckit.constitution` 提出变更，附理由与版本号 bump 类型
-2. 若原则影响模板，在同一变更集中更新 plan、spec、tasks 等依赖模板
+1. 通过 PR 直接修订本文件，附理由与版本号 bump 类型
+2. 同步更新 `docs/TEAM-PLAYBOOK.md` 等人类可读摘要（若原则有变）
 3. 在本文件页脚记录版本与日期
 
-**合规审查**：`/speckit.analyze` 与人工评审 **必须** 将违反宪法的事项视为 **严重（CRITICAL）** 问题。Agent 在实施前 **必须** 阅读 `.specify/memory/constitution.md` 与当前功能的 `plan.md`。
+**合规审查**：Code Review 与人工评审 **必须** 将违反宪法的事项视为 **严重（CRITICAL）** 问题。Agent 在实施前 **必须** 阅读本文件与对应 OpenSpec change。
 
 **运行时指引**：`.cursor/rules/specify-rules.mdc` 为 Agent 提供技术栈摘要；本地/测试细则见 `docs/engineering-standards.md`。
 
-**版本**：1.2.0 | **批准日期**：2026-05-26 | **最后修订**：2026-06-16
+**版本**：1.3.0 | **批准日期**：2026-05-26 | **最后修订**：2026-06-25

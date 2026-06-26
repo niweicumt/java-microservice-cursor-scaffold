@@ -46,7 +46,7 @@ The repository SHALL provide exactly one primary onboarding document at `docs/GE
 #### Scenario: Developer starts AI feature work
 
 - **WHEN** a developer selects Path C
-- **THEN** the document SHALL link to `docs/AI-NATIVE-ENGINEERING.md` for the full OpenSpec / Speckit workflow (not duplicate that content inline)
+- **THEN** the document SHALL link to `docs/AI-NATIVE-ENGINEERING.md` for the full OpenSpec workflow (not duplicate that content inline)
 
 ### Requirement: No duplicate project overview in onboarding
 

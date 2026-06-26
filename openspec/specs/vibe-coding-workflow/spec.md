@@ -8,17 +8,17 @@
 
 ### Requirement: OpenSpec-driven vibe coding standard flow
 
-The repository SHALL document a standard vibe coding workflow: `/opsx-propose` or `/opsx-explore` → `/opsx-apply` (or `/speckit.implement`) → local test + coverage → `/opsx-sync` → PR → `/opsx-archive`, enforced for non-trivial changes.
+The repository SHALL document a standard vibe coding workflow: `/opsx-propose` or `/opsx-explore` → `/opsx-apply` → local test + coverage → `/opsx-sync` → PR → `/opsx-archive`, enforced for non-trivial changes.
 
 #### Scenario: Feature development with AI
 
 - **WHEN** a developer uses Cursor Agent to implement a feature
-- **THEN** TEAM-PLAYBOOK and AI-NATIVE-ENGINEERING SHALL require an OpenSpec change or Speckit spec to exist before `/opsx-apply` or `/speckit.implement` for production code paths
+- **THEN** TEAM-PLAYBOOK and AI-NATIVE-ENGINEERING SHALL require an OpenSpec change to exist before `/opsx-apply` for production code paths
 
 #### Scenario: Small doc-only change
 
 - **WHEN** a change is documentation-only under `docs/`
-- **THEN** the workflow MAY skip Speckit but SHALL still use a PR with `docs/` branch naming per PULL-REQUEST-WORKFLOW
+- **THEN** the workflow MAY skip OpenSpec but SHALL still use a PR with `docs/` branch naming per PULL-REQUEST-WORKFLOW
 
 ### Requirement: Cursor as mandatory IDE with rules enforcement
 
@@ -36,4 +36,4 @@ AI-NATIVE-ENGINEERING or TEAM-PLAYBOOK SHALL include a brief mapping to industry
 #### Scenario: Tech lead onboarding external hire
 
 - **WHEN** a hire asks how this team compares to common AI-native setups
-- **THEN** the industry alignment section SHALL map team tools (OpenSpec, Speckit, SonarLint, JaCoCo) to those practice names
+- **THEN** the industry alignment section SHALL map team tools (OpenSpec, SonarLint, JaCoCo) to those practice names

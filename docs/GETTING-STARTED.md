@@ -76,7 +76,7 @@ mvn -pl skeleton-service spring-boot:run -Dspring-boot.run.profiles=dev
 ### 5.3 路径 C：AI 开发新功能
 
 ```text
-/opsx-propose → /speckit.specify → /speckit.implement → Pre-PR Checklist → PR
+/opsx-propose → /opsx-apply → Pre-PR Checklist → PR
 ```
 
 详见 **[TEAM-PLAYBOOK.md §2](TEAM-PLAYBOOK.md#2-vibe-coding-闭环)** · [AI-NATIVE-ENGINEERING.md](AI-NATIVE-ENGINEERING.md)
